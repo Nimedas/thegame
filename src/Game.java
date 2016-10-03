@@ -109,7 +109,8 @@ public class Game {
      */
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
-
+        boolean objectiveComplete = false;
+        
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -135,7 +136,7 @@ public class Game {
 		}else if (commandWord.equals(CommandWords.CommandWord.GIVE)){
 			giveItem(command);
 		}
-        return wantToQuit;
+        return wantToQuit || objectiveComplete;
     }
 
     // implementations of user commands:
