@@ -62,4 +62,8 @@ public abstract class Entity {
 		boolean isItem = type == Type.OBJECT;
 		return isItem;
 	}
+	
+	public static boolean testObjective(Entity item, Entity character){
+		return (item.getName().toUpperCase().equals(new String("sandwich").toUpperCase()) && character.getName().toUpperCase().equals(new String("Michel_Dubois").toUpperCase()));
+	}
 }

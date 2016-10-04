@@ -33,6 +33,7 @@ public class Player extends Entity{
 		if(success){
 			removeItem(item.getName());
 		}
+		
 		return success;
 	}
 }

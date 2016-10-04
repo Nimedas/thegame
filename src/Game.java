@@ -134,8 +134,11 @@ public class Game {
 		}else if (commandWord.equals(CommandWords.CommandWord.DROP)){
 			dropItem(command);
 		}else if (commandWord.equals(CommandWords.CommandWord.GIVE)){
-			giveItem(command);
+			objectiveComplete = giveItem(command);
 		}
+        if(objectiveComplete){
+        	System.out.println("Congratulation, you won THE GAME!");
+        }
         return wantToQuit || objectiveComplete;
     }
 
@@ -273,11 +276,13 @@ public class Game {
     }
     
     
-    public void giveItem(Command command){
+    public boolean giveItem(Command command){
+    	boolean objectiveComplete = false;
+    	
     	if(!command.hasXArguments(2)) {
             // if there is no second word, we don't know where to go...
             System.out.println("Give to who what?");
-            return;
+            return false;
         }
 
     	String characterName = command.getArguments().get(0);
@@ -288,13 +293,19 @@ public class Game {
         if(character != null && character.isCharacter() ){
         	if(item != null && item.isItem()){
         		Player otherPlayer = (Player) character;
-        		player.giveItem(otherPlayer, item);
+        		boolean success = player.giveItem(otherPlayer, item);
+        		if(success){
+        			System.out.println("Item "+item.getName()+" given to "+character.getName()+".");
+        			objectiveComplete = Entity.testObjective(item, character);
+        		}
         	}else{
         		System.out.println("You don't carry this item.");
         	}
         }else{
         	System.out.println("This character isn't in the room.");
         }
+        
+        return objectiveComplete;
     }
     
     public static void main(String[] args) {
