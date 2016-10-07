@@ -39,32 +39,32 @@ public class Game {
         iut = new Room("This is the school where you go everyday to study.");
         salle_029 = new Room("Home sweet home. You are in room 029.");
         cafeteria = new Room("Cafeteria. Seriously ?");
-        salle_120 = new Room("As you enter room 120, your nose picks up a strong sent. You know what. You know who. Run.");
+        salle_120 = new Room("As you enter room 120, you hear a noise. Someone's here.");
         amphi_a = new Room("As you enter amphitheater A, your entire body feels numb. You don't want to go there. It reminds you of horrible memories. Ugh.");
         vandb = new Room("Student during the day, drinker at night. This is your one true home. Welcome to V&B.");
         corridor = new Room("You wander in the corridors you know so well. It is useless to stay here, hurry the fuck up.");
         salle_209 = new Room("This was your favourite teacher's favourite room. As you slightly remember Philippe's lessons, you shed a tear.");
         
         // initialise room exits
-        village.setExit("north", amphi_a);
-        iut.setExit("south", amphi_a);
-        iut.setExit("north", corridor);
-        salle_029.setExit("back", corridor);
-        cafeteria.setExit("east", corridor);
-        cafeteria.setExit("north", vandb);
-        salle_120.setExit("back", corridor);
-        amphi_a.setExit("south", village);
-        amphi_a.setExit("north", iut);
-        vandb.setExit("south", cafeteria);
-        corridor.setExit("south", iut);
-        corridor.setExit("east", salle_029);
-        corridor.setExit("west", cafeteria);
-        corridor.setExit("2_floor", salle_209);
-        corridor.setExit("1_floor", salle_120);
-        salle_209.setExit("back", corridor);
+        village.setExit("amphiA", amphi_a);
+        iut.setExit("amphiA", amphi_a);
+        iut.setExit("couloir", corridor);
+        salle_029.setExit("couloir", corridor);
+        cafeteria.setExit("couloir", corridor);
+        cafeteria.setExit("vandb", vandb);
+        salle_120.setExit("couloir", corridor);
+        amphi_a.setExit("village", village);
+        amphi_a.setExit("iut", iut);
+        vandb.setExit("cafeteria", cafeteria);
+        corridor.setExit("iut", iut);
+        corridor.setExit("029", salle_029);
+        corridor.setExit("cafeteria", cafeteria);
+        corridor.setExit("209", salle_209);
+        corridor.setExit("120", salle_120);
+        salle_209.setExit("couloir", corridor);
         
-        Entity dubois = new NonPlayableCharacter("Michel_Dubois", "The sinister", "You gaze into its eyes and feel the emptiness of the void.", Entity.Type.NEUTRAL);
-        Entity bogdaniu = new NonPlayableCharacter("Bogdaniu", "The what the fuck is he doing here", "He slowly notices you as you keep looking at him. He seems to misundertand your intentions. Be careful.", Entity.Type.AGGRESSIVE);
+        Entity dubois = new NonPlayableCharacter("Michel", "", "The way he looks at you makes you understand he is hunngry. Maybe you should go and fetch him some food.", Entity.Type.NEUTRAL);
+        Entity bogdaniu = new NonPlayableCharacter("Bogdaniu", "Ballooning man", "He's sleeping. He must be dreaming of ballooning.", Entity.Type.NEUTRAL);
         Entity sandwich = new PickableObject("Sandwich","Rotten","It smells bad but hey, he might like it.", Entity.Type.OBJECT);
         salle_029.addEntity(dubois);
         salle_120.addEntity(bogdaniu);
@@ -144,6 +144,10 @@ public class Game {
 
     // implementations of user commands:
 
+    /**
+     * Inspect an entity and print its description
+     * @param command The command used to retrieve the parameter
+     */
     private void printEntityInfo(Command command) {
         if(!command.hasXArguments(1)) {
             // if there is no second word, what to inspect...
@@ -226,6 +230,9 @@ public class Game {
     	System.out.println(currentRoom.getEntitiesString());
     }
     
+    /**
+     * Print the player's inventory
+     */
     public void printInventory(){
     	Set<String> inventory = player.getKeys();
     	System.out.println("Your current inventory: ");
@@ -235,6 +242,11 @@ public class Game {
     	}
     }
     
+    /**
+     * Pickup an item and place it in your inventory
+     * Check whether the item is present in the room or not
+     * @param command The command used to retrieve the parameter
+     */
     public void pickupItem(Command command){
         if(!command.hasXArguments(1)) {
             // if there is no second word, we don't know where to go...
@@ -257,6 +269,10 @@ public class Game {
         }
     }
     
+    /**
+     * Drop an item in the current room from your inventory
+     * @param command The command used to retrieve the parameter
+     */
     public void dropItem(Command command){
     	if(!command.hasXArguments(1)) {
             // if there is no second word, we don't know where to go...
@@ -275,7 +291,11 @@ public class Game {
         }
     }
     
-    
+    /**
+     * Give an item from your inventory to another character
+     * @param command The command used to retrieve the parameters (Character and item)
+     * @return Whether the objective is complete or not
+     */
     public boolean giveItem(Command command){
     	boolean objectiveComplete = false;
     	

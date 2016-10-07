@@ -8,6 +8,10 @@
 
 public class CommandWords {
 
+	/**
+	 * Enum corresponding to the useable commands
+	 * They have a description that can be printed
+	 */
     public enum CommandWord {
     	GO("Move your character. Enter 'go <keyword>'."),
     	QUIT("Quit the game."),
@@ -22,10 +26,17 @@ public class CommandWords {
     	
     	private String description;
     	
+    	/**
+    	 * New command
+    	 * @param description Its description
+    	 */
     	CommandWord(String description){
     		this.description = description;
     	}
     	
+    	/**
+    	 * @return the command's description
+    	 */
     	public String getDescription(){
     		return this.description;
     	}

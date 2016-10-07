@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Parser {
     private CommandWords commands;  // holds all valid command words
     private Scanner reader;         // source of command input
-    private List<String> arguments;
+    private List<String> arguments; // arguments of the command
 
     /**
      * Create a parser to read from the terminal window.
@@ -29,7 +29,7 @@ public class Parser {
     }
 
     /**
-     * @return The next command from the user.
+     * @return The next command from the user with every arguments
      */
     public Command getCommand()  {
         String inputLine;   // will hold the full input line
@@ -40,17 +40,17 @@ public class Parser {
 
         inputLine = reader.nextLine();
 
-        // Find up to two words on the line.
+        // Find every words
         Scanner tokenizer = new Scanner(inputLine);
         if(tokenizer.hasNext()) {
             word1 = tokenizer.next();      // get first word
-            while(tokenizer.hasNext()) {
+            while(tokenizer.hasNext()) { //get arguments
             	arguments.add(tokenizer.next());
             }
         }
         tokenizer.close();
         // Now check whether this word is known. If so, create a command
-        // with it. If not, create a "null" command (for unknown command).
+        // with it. If not, create an UNNOWN command.
         if(commands.isCommand(word1)) {
             return new Command(commands.getCommandWord(word1), arguments);
         }
@@ -59,6 +59,9 @@ public class Parser {
         }
     }
     
+    /**
+     * @return The parser's arguments
+     */
     public List<String> getArguments(){
     	return arguments;
     }

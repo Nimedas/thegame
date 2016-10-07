@@ -76,10 +76,16 @@ public class Room {
         return description;
     }
     
+    /**
+     * @return The room's complete description with the available exits
+     */
     public String getLongDescription(){
     	return description + "\n" + this.getExitString() + "\n";
     }
 
+    /**
+     * @return A list of entities in the room (Sorts whether they are items or not)
+     */
     public String getEntitiesString(){
     	String objects = "In the room, you find:\n";
     	String characters = "You come into contact with:\n";
@@ -109,14 +115,27 @@ public class Room {
     	return res;
     }
     
+    /**
+     * Add an entity to the room
+     * @param entite The entity to add
+     */
     public void addEntity(Entity entite){
     	entites.put(entite.getName().toUpperCase(),entite);
     }
     
+    /**
+     * Return an entity
+     * @param name The name of the wanted entity
+     * @return The entity (or null if it does not exist in this room)
+     */
     public Entity getEntity(String name){
     	return entites.get(name.toUpperCase());
     }
     
+    /**
+     * Remove an entity from the room
+     * @param name The entity to remove
+     */
     public void removeEntity(String name){
     	entites.remove(name.toUpperCase());
     }

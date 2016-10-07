@@ -21,11 +21,10 @@ public class Command {
     private List<String> arguments;
 
     /**
-     * Create a command object. First and second word must be supplied, but
-     * either one (or both) can be null.
-     * @param firstWord The first word of the command. Null if the command
+     * Create a command object.
+     * @param firstWord The first word of the command. UNKNOWN if the command
      *                  was not recognised.
-     * @param secondWord The second word of the command.
+     * @param arguments The argument list
      */
     public Command(CommandWords.CommandWord firstWord, List<String> arguments) {
         commandWord = firstWord;
@@ -34,7 +33,7 @@ public class Command {
 
     /**
      * Return the command word (the first word) of this command. If the
-     * command was not understood, the result is null.
+     * command was not understood, the result is "UNKNOWN".
      * @return The command word.
      */
     public CommandWords.CommandWord getCommandWord()  {
@@ -42,8 +41,7 @@ public class Command {
     }
 
     /**
-     * @return The second word of this command. Returns null if there was no
-     * second word.
+     * @return The argument's list
      */
     public List<String> getArguments() {
         return arguments;
@@ -57,7 +55,7 @@ public class Command {
     }
 
     /**
-     * @return true if the command has a second word.
+     * @return true if the command has at least "howMany" arguments.
      */
     public boolean hasXArguments(int howMany)   {
         return (arguments.size() >= howMany);
