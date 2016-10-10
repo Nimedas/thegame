@@ -63,10 +63,10 @@ public class Game {
         corridor.setExit("120", salle_120);
         salle_209.setExit("couloir", corridor);
         
-        Entity dubois = new NonPlayableCharacter("Michel", "", "The way he looks at you makes you understand he is hunngry. Maybe you should go and fetch him some food.", Entity.Type.NEUTRAL);
+        Entity michel = new NonPlayableCharacter("Michel", "", "The way he looks at you makes you understand he is hungry. Maybe you should go and fetch him some food.", Entity.Type.NEUTRAL);
         Entity bogdaniu = new NonPlayableCharacter("Bogdaniu", "Ballooning man", "He's sleeping. He must be dreaming of ballooning.", Entity.Type.NEUTRAL);
         Entity sandwich = new PickableObject("Sandwich","Rotten","It smells bad but hey, he might like it.", Entity.Type.OBJECT);
-        salle_029.addEntity(dubois);
+        salle_029.addEntity(michel);
         salle_120.addEntity(bogdaniu);
         cafeteria.addEntity(sandwich);
 

@@ -32,7 +32,7 @@ public class Room {
      * @return the direction
      */
     public Room getExit(String direction){
-    	return this.exits.get(direction);
+    	return this.exits.get(direction.toUpperCase());
     }
 
     /**
@@ -41,8 +41,8 @@ public class Room {
      * @param neighbor The room
      */
     public void setExit(String direction, Room neighbor){
-    	if(neighbor != null){
-    		this.exits.put(direction, neighbor);
+    	if(neighbor != null && direction != null && !direction.isEmpty()){
+    		this.exits.put(direction.toUpperCase(), neighbor);
     	}else{
     		System.out.println("Sortie incorrecte.");
     	}
@@ -66,7 +66,7 @@ public class Room {
      * @return True or false
      */
     public boolean hasExit(String direction){
-    	return this.exits.containsKey(direction);
+    	return this.exits.containsKey(direction.toUpperCase());
     }
     
     /**

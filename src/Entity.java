@@ -101,7 +101,7 @@ public abstract class Entity {
 	 * @return A string corresponding to the entity, without its description
 	 */
 	public String toString(){
-		return (this.getType() == Type.OBJECT ? "a " : this.getType() + " | ") + this.getName() + (this.getTitle() != null ? " | "+this.getTitle() : "");
+		return (this.getType() == Type.OBJECT ? "a " : this.getType() + " | ") + this.getName() + (this.getTitle() != null && !this.getTitle().isEmpty() ? " | "+this.getTitle() : "");
 	}
 	
 	/**
