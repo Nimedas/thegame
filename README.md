@@ -1,2 +1,2 @@
 # thegame
-Shitty adventure text-based java game
+Adventure text-based java game
